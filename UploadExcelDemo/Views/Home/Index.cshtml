@@ -1,0 +1,113 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<form class="form-horizontal" name="frmApplication" novalidate ng-app="StudentMaster">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+            <label>First Name</label>
+            <input type="text" id="FirstName" name="FirstName" placeholder="Enter First Name" class="form-control" required ng-model="FirstName" />
+            <span style="color:red" ng-show="frmApplication.FirstName.$dirty && frmApplication.FirstName.$invalid">
+                <span ng-show="frmApplication.FirstName.$error.required">First Name is required.</span>
+            </span>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+            <label>Last Name</label>
+            <input type="text" id="LastName" name="LastName" placeholder="Enter Last Name" class="form-control" required ng-model="LastName" />
+            <span style="color:red" ng-show="frmApplication.LastName.$dirty && frmApplication.LastName.$invalid">
+                <span ng-show="frmApplication.LastName.$error.required">Last Name is required.</span>
+
+            </span>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 form-group">
+            <label>Semester</label>
+            <input type="number" id="Semester" name="Semester" ng-model="Semester" class="form-control" min="1" max="8" />
+            <span style="color:red" ng-show="frmApplication.LastName.$dirty && frmApplication.LastName.$invalid">
+                <span ng-show="frmApplication.LastName.$error.required">Last Name is required.</span>
+            </span>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 form-group">
+            <label>Section</label>
+            <input type="text" id="Section" name="Section" ng-model="Section" class="form-control" />
+            <span style="color:red" ng-show="frmApplication.Section.$dirty && frmApplication.Section.$invalid">
+                <span ng-show="frmApplication.Section.$error.required">Last Name is required.</span>
+            </span>
+        </div>
+    </div>
+</form>
+
+@section scripts{
+    <script>
+        var app = angular.module('StudentMaster', []);
+        app.controller('validate', function ($scope) { });
+    </script>
+
+    <script>
+        function SaveData() {
+            alert('save');
+        }
+    </script>
+}
+
+
+@*<div class="row col-md-12" ng-controller="validate">
+        <div class="form-horizontal" role="form">
+            <div class="form-group" ng-class="{ 'has-error' : frmApplication.firstName.$invalid && !frmApplication.firstName.$pristine }">
+                <label for="FirstName" class="col-sm-4 control-label">First Name :</label>
+                <div class="col-sm-8">
+                    <input type="text" name="firstName" id="firstName" class="form-control" ng-model="Application.firstName" placeholder="Enter First Name" required />
+                    <p ng-show="frmApplication.firstName.$invalid && !frmApplication.firstName.$pristine" class="help-block">First name is required</p>
+                </div>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-error' : frmApplication.lastName.$invalid && !frmApplication.lastName.$pristine }">
+                <label for="LastName" class="col-sm-4 control-label">Last Name :</label>
+                <div class="col-sm-8">
+                    <input type="text" name="lastName" id="lastName" class="form-control" ng-model="Application.lastName" placeholder="Enter Last name" required />
+                    <p ng-show="frmApplication.lastName.$invalid && !frmApplication.lastName.$pristine" class="help-block"> Last name is required</p>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : frmApplication.contactNumber.$invalid && !frmApplication.contactNumber.$pristine }">
+                <label for="contactNumber" class="col-sm-4 control-label">Contact Number :</label>
+                <div class="col-sm-8">
+                    <input type="text" name="contactNumber" id="contactNumber" class="form-control" ng-model="Application.contactNumber" placeholder="Enter Contact Number" />
+                    <p ng-show="frmApplication.contactNumber.$invalid && !frmApplication.contactNumber.$pristine" class="help-block">Enter number only</p>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : frmApplication.Email.$invalid && !frmApplication.Email.$pristine }">
+                <label for="Email" class="col-sm-4 control-label">Email Id :</label>
+                <div class="col-sm-8">
+                    <input type="email" name="Email" id="Email" class="form-control" ng-model="Application.Email" placeholder="Enter Email" required />
+                    <p style="padding-bottom:0; margin-bottom:0;" ng-show="frmApplication.Email.$invalid && !frmApplication.Email.$pristine" class="help-block">Enter a valid email.</p>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : frmApplication.userid.$invalid && !frmApplication.userid.$pristine }">
+                <label for="userid" class="col-sm-4 control-label">User Id:</label>
+                <div class="col-sm-8">
+                    <input type="text" name="userid" id="userid" class="form-control" ng-model="Application.userid" placeholder="Enter User Id" ng-pattern="/^[a-zA-Z0-9]*$/" required />
+                    <p style="padding-bottom:0; margin-bottom:0;" ng-show="frmApplication.userid.$invalid && !frmApplication.userid.$pristine" class="help-block">Spaces & Special characters not allowed </p>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : frmApplication.gender.$invalid && !frmApplication.gender.$pristine }">
+                <label for="Gender" class="col-sm-4 control-label">Gender :</label>
+                <div class="col-md-8">
+                    <select name="gender" id="gender" class="form-control" ng-model="Application.gender" required>
+                        <option value="">- Select -</option>
+                        <option>Male</option>
+                        <option>Female</option>
+                    </select>
+                    <p ng-show="frmApplication.gender.$invalid && !frmApplication.gender.$pristine" class="help-block">Select gender</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-4 col-md-8">
+                    <button type="button" ng-disabled="frmApplication.$invalid || frmApplication.$pristine" class="btn btn-primary" onclick="SaveData()">
+                        Submit
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>*@
